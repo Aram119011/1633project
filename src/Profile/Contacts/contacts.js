@@ -15,27 +15,93 @@ import {connect} from "react-redux";
 import MyProfile from "../MyProfile/myprofile";
 import {compose} from "redux";
 import {WithAuthRedirect} from "../../hoc/AuthRedirect";
+import Setings from "../Settings/settings";
+import CreatConferance from "../Miting/CreateConference/createconference";
+import JoinMeeting from "../Miting/JoinMeeting/joinmeeting";
+import GrupChat from "../Miting/JoinMeeting/joinmeeting";
+import ScheduleMeeting from "../Miting/ScheduleMeeting/schedulemeeting";
+
+
+// images
+import imgMenuIcon from '../../images/svg/menu-icon.svg';
+import imgExclamatio from '../../images/svg/exclamation.svg';
+import imgSentByUser from '../../images/sent-by-user.png';
+import imgCreateConference from '../../images/icons/CreateConference-icon.png';
+import imgJoinMeeting from '../../images/icons/JoinMeeting-icon.png';
+import imgGroupChat from '../../images/icons/GroupChat-icon.png';
+import imgScheduleMeeting from '../../images/icons/ScheduleMeeting-icon.png';
+import Pricing from "../Pricing/pricing";
 
 
 class Contacts extends React.Component {
-
     constructor(props) {
         super(props);
-
         this.state = {
-            openprofile: 'false',
-        }
+            isModalMenue: false,
+
+            isModalOpen: false,
+            dropDown: false,
+            isModalSetingsOpen: false,
+            isModalPricingOpen: false,
+
+            isModalCreatConferanceOpen: false,
+            // isModalNewChatOpen: false,
+            isModalJoinMeeting: false,
+            isModalGrupChat: false,
+            isModalScheduleMeeting: false,
+            // isModalcreatewebinar: false,
+
+        };
     }
 
-    // openprofile = ()=>{
-    //     this.setState(state => ({ openprofile: !state.openprofile }));
-    //     console.log(this.state.openprofile,'open')
-    //
-    // }
+    toggleDropDown = () => {
+        this.setState(state => {
+            return {
+                ...state,
+                dropDown: !state.dropDown
+            }
+        })
+    };
 
-    // closeprofile =() => {
-    //     this.setState(state => ({ openprofile: false }))
-    // }
+    openModal() {
+        this.setState({isModalOpen: true});
+    }
+
+    closeModal = () => {
+        this.setState({isModalOpen: false});
+    };
+
+    openModalSetings() {
+        this.setState({isModalSetingsOpen: true});
+    }
+
+    closeModalSetings() {
+        this.setState({isModalOpen: false});
+    }
+
+    openModalPricing() {
+        this.setState({isModalPricingOpen: true});
+    }
+
+    openModalcreatconferance() {
+        this.setState({isModalCreatConferanceOpen: true});
+    }
+
+
+
+    openModaljoinmeeting() {
+        this.setState({isModalJoinMeeting: true});
+    }
+
+    openModalgrupchat() {
+        this.setState({isModalGrupChat: true});
+    }
+
+    openModalschedulemeeting() {
+        this.setState({isModalScheduleMeeting: true});
+    }
+
+
 
     render() {
 
@@ -49,6 +115,40 @@ class Contacts extends React.Component {
         });
         return (
             <div className="bodyProfile">
+
+                {
+                    this.state.isModalOpen ? <MyProfile closeModal={this.closeModal}/> : null
+                }
+
+                {
+                    this.state.isModalSetingsOpen ? <Setings/> : null
+                }
+
+                {
+                    this.state.isModalPricingOpen ? <Pricing/> : null
+                }
+
+                {
+                    this.state.isModalCreatConferanceOpen ? <CreatConferance/> : null
+                }
+
+
+
+                {
+                    this.state.isModalJoinMeeting ? <JoinMeeting/> : null
+                }
+
+                {
+                    this.state.isModalGrupChat ? <GrupChat/> : null
+                }
+                {
+                    this.state.isModalScheduleMeeting ? <ScheduleMeeting/> : null
+                }
+
+                {/*{*/}
+                {/*    this.state.openModalcreatconferance ? <CreatConferance/> : null*/}
+                {/*}*/}
+
                 {/* <h1>hello</h1> */}
                 <div className="wrapper">
                     <div className="profile-controller menu">
@@ -56,9 +156,11 @@ class Contacts extends React.Component {
                             <p className="time-content"><span id="now-time">{moment().format('LT')}</span></p><br/>
                             <p id="now_date">{moment().format('ll')}</p>
                         </div>
+
                         <div className="showMenuBtn">
                             {/*<img src={require("../images/svg/menu-icon.svg")}/>*/}
-                            <img src={require("../../images/svg/menu-icon.svg")}/>
+                            {/*<img src={require("../../images/svg/menu-icon.svg")}/>*/}
+                            <img src={imgMenuIcon}/>
                         </div>
                         <div className="menu-bar">
                             <div className="profile-content">
@@ -72,38 +174,46 @@ class Contacts extends React.Component {
 
                                     {/*<p className="user-name">Mostafa Monier</p>*/}
                                     <p className="user-name">{this.props.userData.username}</p>
-
+                                    {/*<button onClick={() => this.openModal()}>Open modal</button>*/}
                                     <div className="dropdown">
-                                        <button className="btn btn-secondary dropdown-toggle prof-settings-btn"
-                                                type="button"
-                                                id="user_menu_avatar"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button
+                                            onClick={this.toggleDropDown}
+                                            className="btn btn-secondary dropdown-toggle prof-settings-btn"
+                                            type="button"
+                                            id="user_menu_avatar"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Profile Settings
-
                                         </button>
 
-
-                                        <div className="dropdown-menu popover-content"
-                                             aria-labelledby="user_menu_avatar">
+                                        <div
+                                            style={this.state.dropDown ? {display: 'block'} : {display: 'none'}}
+                                            className="dropdown-menu popover-content"
+                                            aria-labelledby="user_menu_avatar">
                                             <div>
                                                 <ul>
                                                     <li>
-                                                        <Link className="dropdown-item" to="">
-                                                            <button name="profile" className="btn p-0"
-                                                                    data-toggle="modal"
-                                                                    data-target="#profile">
-                                                                Profile
-                                                            </button>
-                                                        </Link>
+                                                        <button onClick={() => this.openModal()} name="profile"
+                                                                className="btn p-0"
+                                                                data-toggle="modal"
+                                                                data-target="#profile">
+                                                            Profile
+                                                        </button>
                                                     </li>
                                                     <li>
-                                                        <Link className="dropdown-item" to="">
-                                                            <button name="settings" className="btn p-0"
-                                                                    data-toggle="modal"
-                                                                    data-target="#settings">
-                                                                Settings
-                                                            </button>
-                                                        </Link>
+                                                        <button onClick={() => this.openModalSetings()} name="settings"
+                                                                className="btn p-0"
+                                                                data-toggle="modal"
+                                                                data-target="#settings">
+                                                            Settings
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button onClick={() => this.openModalPricing()} name="pricing"
+                                                                className="btn p-0"
+                                                                data-toggle="modal"
+                                                                data-target="#Pricing">
+                                                            pricing
+                                                        </button>
                                                     </li>
                                                     <li className="mb-0">
                                                         <Link className="dropdown-item" to="">
@@ -138,7 +248,6 @@ class Contacts extends React.Component {
                                         <div className="icon-bar small-icon-bar">
                                             <Link to="calls">
                                                 <FontAwesomeIcon icon={faPhone} color='orange'/>
-
                                             </Link>
                                         </div>
                                         <div className="icon-name">
@@ -167,7 +276,9 @@ class Contacts extends React.Component {
                                     <div>
                                         <div className="icon-bar">
                                             {/*<img src="images/svg/exclamation.svg" alt="" title="">*/}
-                                            <img src={require("../../images/svg/exclamation.svg")}/>
+                                            {/*<img src={require("../../images/svg/exclamation.svg")}/>*/}
+                                            <img src={imgExclamatio}/>
+
 
                                             <span className="new-notifications-quantity">5</span>
                                         </div>
@@ -195,7 +306,8 @@ class Contacts extends React.Component {
                                             <div className="contact-item-content">
                                                 <div>
                                                     <div className="sent-by-user-img">
-                                                        <img src={require("../../images/sent-by-user.png")}/>
+                                                        {/*<img src={require("../../images/sent-by-user.png")}/>*/}
+                                                        <img src={imgSentByUser}/>
 
                                                     </div>
                                                 </div>
@@ -208,7 +320,7 @@ class Contacts extends React.Component {
                                             <div className="contact-item-content">
                                                 <div>
                                                     <div className="sent-by-user-img">
-                                                        <img src={require("../../images/sent-by-user.png")}/>
+                                                        <img src={imgSentByUser}/>
 
                                                     </div>
                                                 </div>
@@ -370,79 +482,90 @@ class Contacts extends React.Component {
                     </div>
 
                     {/*kkkk*/}
+
                     <div className="profile-banner">
                         <div className="profile-body">
                             <div className="head-company-name">
                                 <h1><span className="color-style">Comfy</span>Meet</h1>
                                 <h2>Online Meeting Platform</h2>
                             </div>
+
                             <div className="dashboard">
-                                <button type="button" className="btn-primary" data-toggle="modal"
+                                <button onClick={() => this.openModalcreatconferance()} type="button"
+                                        className="btn-primary" data-toggle="modal"
                                         data-target="#createConferenceModal">
-                    <span className="content-img">
-                        <img src={require("../../images/icons/CreateConference-icon.png")}/>
+                                            <span className="content-img">
+                                                <img src={imgCreateConference}/>
 
-                    </span>
+                                            </span>
                                     <span className="content-name">
-                        <span>Create Conference</span>
-                    </span>
+                                                <span>Create Conference</span>
+                                            </span>
                                 </button>
-                                <button type="button" className="btn-primary" data-toggle="modal"
-                                        data-target="#chooseContactModal">
-                    <span className="content-img">
-                        <img src={require("../../images/icons/NewChat-icon.png")}/>
-                    </span>
-                                    <span className="content-name">
-                        <span>New Chat</span>
-                    </span>
-                                </button>
+                    {/*            <button onClick={() => this.openModalnewchat()} type="button" className="btn-primary"*/}
+                    {/*                    data-toggle="modal"*/}
+                    {/*                    data-target="#chooseContactModal">*/}
+                    {/*<span className="content-img">*/}
+                    {/*    <img src={imgNewChat}/>*/}
+                    {/*</span>*/}
+                    {/*                <span className="content-name">*/}
+                    {/*    <span>New Chat</span>*/}
+                    {/*</span>*/}
+                    {/*            </button>*/}
 
-                                <button type="button" className=" btn-primary" data-toggle="modal"
+                                <button onClick={() => this.openModaljoinmeeting()} type="button"
+                                        className=" btn-primary" data-toggle="modal"
                                         data-target="#joinMeetingModal">
                                         <span className="content-img">
-                                            <img src={require("../../images/icons/JoinMeeting-icon.png")}/>
+                                            <img src={imgJoinMeeting}/>
                                         </span>
                                     <span className="content-name">
                                             <span>Join Meeting</span>
                                         </span>
                                 </button>
-                                <button type="button" className="btn-primary" data-toggle="modal"
-                                        data-target="#groupChatModal">
-                                        <span className="content-img">
-                                        <span>
-                                            <img src={require("../../images/icons/GroupChat-icon.png")}/>
-                                        </span>
-                                        </span>
-                                    <span className="content-name">
-                                            <span>Group Chat</span>
-                                        </span>
-                                </button>
 
-                                <button type="button" className="btn-primary" data-toggle="modal"
+
+                                <button onClick={() => this.openModalschedulemeeting()} type="button"
+                                        className="btn-primary" data-toggle="modal"
                                         data-target="#scheduleMeetingModal">
                                         <span className="content-img">
-                                             <img src={require("../../images/icons/ScheduleMeeting-icon.png")}/>
+                                             <img src={imgScheduleMeeting}/>
 
                                          </span>
                                     <span className="content-name">
                                          <span>Schedule Meeting</span>
                                         </span>
                                 </button>
-                                <button>
-                                <span className="content-img">
-                                 <span>
-                                    <img src={require("../../images/icons/CreateWebinar-icon.png")}/>
 
-                                 </span>
-                                 </span>
+                                <button onClick={() => this.openModalgrupchat()} type="button" className="btn-primary"
+                                        data-toggle="modal"
+                                        data-target="#groupChatModal">
+                                        <span className="content-img">
+                                        <span>
+                                            <img src={imgGroupChat}/>
+                                        </span>
+                                        </span>
                                     <span className="content-name">
-                                 <span>Create Webinar</span>
-                                    </span>
+                                            <span>New Group Chat</span>
+                                        </span>
                                 </button>
+
+
+                                {/*<button onClick={() => this.openModalcreatewebinar()}>*/}
+                                {/*<span className="content-img">*/}
+                                {/* <span>*/}
+                                {/*    <img src={imgCreateWebinar}/>*/}
+
+                                {/* </span>*/}
+                                {/* </span>*/}
+                                {/*    <span className="content-name">*/}
+                                {/* <span>Create Webinar</span>*/}
+                                {/*    </span>*/}
+                                {/*</button>*/}
                             </div>
                             <div className="scheduled-meetings">
                                 <button className="scheduled-meet-btn">
-                                    {/*<img src={require("../images/svg/downArrow.svg")}/>*/}
+                                    <img src={require("../../images/svg/downArrow.svg")}/>
                                 </button>
                                 <div className="content">
                                     <p className="user-greetings">Hello, <span
@@ -608,10 +731,13 @@ class Contacts extends React.Component {
 }
 
 
+// const mapStateToProps = state => ({userData: state.auth});
+//
+// export default compose(
+//     connect(mapStateToProps),
+//     WithAuthRedirect
+// )(Contacts);
 
 const mapStateToProps = state => ({userData: state.auth});
 
-export default compose(
-    connect(mapStateToProps),
-    WithAuthRedirect
-)(Contacts);
+export default connect(mapStateToProps)(Contacts);

@@ -152,3 +152,84 @@
     box-shadow: none;
     outline: none;
 }
+/***/
+#profile{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background-color: #00000082;
+
+}
+#profile .form-control {
+    border: 1px solid #6A6A6A;
+    box-sizing: border-box;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: rgba(106, 106, 106, 0.5);
+    padding: 7px 20px;
+    box-shadow: none;
+    outline: none;
+}
+#profile .modal-body .content-name h2 {
+    font-size: 22px;
+    line-height: 26px;
+    color: #434343;
+    margin-bottom: 0;
+    text-align: center;
+}
+#profile .modal-header{
+    border-bottom: 0;
+}
+#profile .modal-body{
+margin-bottom: 50px;
+}
+input[type=color], input[type=date], input[type=datetime-local],
+input[type=datetime], input[type=email], input[type=month],
+input[type=number], input[type=password], input[type=search],
+input[type=tel], input[type=text], input[type=time], input[type=url],
+input[type=week], textarea {
+    display: inherit;
+    padding: 4px 30px;
+    height: inherit;
+    color: inherit;
+    vertical-align: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    border: 1px solid;
+}
+
+#profile .form-group {
+    width: 250px;
+    margin-bottom: 15px;
+}
+#profile .modal-body .content-name {
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: center;
+}
+#profile .modal-body, #settings .modal-body {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+#profile .modal-content {
+    max-width: 774px;
+}
+
+.modal-header {
+    padding: 21px 30px 0 30px;
+}
+.modal-header .close {
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    color: #EF7921;
+    padding: 0;
+    box-shadow: none;
+    outline: none;
+}
