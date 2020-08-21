@@ -133,7 +133,6 @@ class Contacts extends React.Component {
                 }
 
 
-
                 {
                     this.state.isModalJoinMeeting ? <JoinMeeting/> : null
                 }
