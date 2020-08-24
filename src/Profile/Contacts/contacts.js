@@ -75,18 +75,28 @@ class Contacts extends React.Component {
         this.setState({isModalSetingsOpen: true});
     }
 
-    closeModalSetings() {
-        this.setState({isModalOpen: false});
-    }
+    closeModalSetings = () => {
+        this.setState({isModalSetingsOpen: false});
+    };
+
+    // closeModalSetings() {
+    //     this.setState({isModalOpen: false});
+    // }
 
     openModalPricing() {
         this.setState({isModalPricingOpen: true});
     }
+    // closeModalPricing() {
+    //     this.setState({isModalPricingOpen: false});
+    // }
+    closeModalPricing = () => {
+        this.setState({isModalPricingOpen: false});
+    };
+
 
     openModalcreatconferance() {
         this.setState({isModalCreatConferanceOpen: true});
     }
-
 
 
     openModaljoinmeeting() {
@@ -100,7 +110,6 @@ class Contacts extends React.Component {
     openModalschedulemeeting() {
         this.setState({isModalScheduleMeeting: true});
     }
-
 
 
     render() {
@@ -121,11 +130,11 @@ class Contacts extends React.Component {
                 }
 
                 {
-                    this.state.isModalSetingsOpen ? <Setings/> : null
+                    this.state.isModalSetingsOpen ? <Setings closeModalSetings={this.closeModalSetings}/> : null
                 }
 
                 {
-                    this.state.isModalPricingOpen ? <Pricing/> : null
+                    this.state.isModalPricingOpen ? <Pricing closeModalPricing={this.closeModalPricing}/> : null
                 }
 
                 {
@@ -501,16 +510,16 @@ class Contacts extends React.Component {
                                                 <span>Create Conference</span>
                                             </span>
                                 </button>
-                    {/*            <button onClick={() => this.openModalnewchat()} type="button" className="btn-primary"*/}
-                    {/*                    data-toggle="modal"*/}
-                    {/*                    data-target="#chooseContactModal">*/}
-                    {/*<span className="content-img">*/}
-                    {/*    <img src={imgNewChat}/>*/}
-                    {/*</span>*/}
-                    {/*                <span className="content-name">*/}
-                    {/*    <span>New Chat</span>*/}
-                    {/*</span>*/}
-                    {/*            </button>*/}
+                                {/*            <button onClick={() => this.openModalnewchat()} type="button" className="btn-primary"*/}
+                                {/*                    data-toggle="modal"*/}
+                                {/*                    data-target="#chooseContactModal">*/}
+                                {/*<span className="content-img">*/}
+                                {/*    <img src={imgNewChat}/>*/}
+                                {/*</span>*/}
+                                {/*                <span className="content-name">*/}
+                                {/*    <span>New Chat</span>*/}
+                                {/*</span>*/}
+                                {/*            </button>*/}
 
                                 <button onClick={() => this.openModaljoinmeeting()} type="button"
                                         className=" btn-primary" data-toggle="modal"

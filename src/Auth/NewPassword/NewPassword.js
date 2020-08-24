@@ -1,6 +1,7 @@
 import React from 'react';
 import '.././auth.css';
 import axios from 'axios'
+import {AuthAPI} from "../../API/api";
 
 class NewPassword extends React.Component {
     constructor(props) {
@@ -67,13 +68,19 @@ class NewPassword extends React.Component {
 
         if (password >= 8 && confirm_password >= 8) {
             // axios.post('http://localhost:5000/api/forgot/password', {
-            axios.post('https://rocky-inlet-34170.herokuapp.com/api/forgot/password', {
-                password,
-                confirm_password,
-                userId,
-                token,
-                // passwordnewdata
-            })
+           AuthAPI.forgotpasswordAuth(
+               password,
+               confirm_password,
+               userId,
+               token
+           )
+            // axios.post('https://rocky-inlet-34170.herokuapp.com/api/forgot/password', {
+            //     password,
+            //     confirm_password,
+            //     userId,
+            //     token,
+            //     // passwordnewdata
+            // })
                 .then(res => {
 
 

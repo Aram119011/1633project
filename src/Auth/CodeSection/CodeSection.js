@@ -1,6 +1,7 @@
 import React from 'react';
 import '.././auth.css';
 import axios from 'axios'
+import {AuthAPI} from "../../API/api";
 
 class CodeSection extends React.Component {
     constructor(props) {
@@ -60,20 +61,18 @@ class CodeSection extends React.Component {
         let token = this.state.inputspass[0].value;
 
         if (token) {
-
+            AuthAPI.codeselectAuth(
+                token
+            )
             // axios.post('http://localhost:5000/api/forgot/code', {token})
-            axios.post('https://rocky-inlet-34170.herokuapp.com/api/forgot/code', {token})
-                .then(res => {
+            // axios.post('https://rocky-inlet-34170.herokuapp.com/api/forgot/code', {token})
 
+                .then(res => {
 
                     if (res.status === 200) {
 
-                        var myarr = [res.data];
-                        {
-                            this.props.newPassword(myarr)
-                        }
-
-
+                        let myarr = [res.data];
+                        this.props.newPassword(myarr);
 
                     }
                 }).catch(errr => {

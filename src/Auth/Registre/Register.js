@@ -1,6 +1,7 @@
 import React from 'react';
 import '.././auth.css';
 import axios from 'axios'
+import {AuthAPI} from "../../API/api";
 
 class Registre extends React.Component {
     constructor(props) {
@@ -98,15 +99,22 @@ class Registre extends React.Component {
             if (this.state.inputs[1].isValid) {
                 if (this.state.inputs[3].value.length >= 8 && this.state.inputs[4].value.length >= 8) {
                     // axios.post('http://localhost:5000/api/auth/register', {
-                    axios.post('https://rocky-inlet-34170.herokuapp.com/api/auth/register', {
+                    // axios.post('https://rocky-inlet-34170.herokuapp.com/api/auth/register', {
+                    //     username,
+                    //     email,
+                    //     phone,
+                    //     password,
+                    //     confirm_password
+                    // })
+                    AuthAPI.registerAuth(
                         username,
                         email,
                         phone,
                         password,
                         confirm_password
-                    })
+                    )
                         .then(res => {
-                            if(res.status===201){
+                            if (res.status === 201) {
                                 {
                                     this.props.openLogin();
                                     this.componentWillUnmount();
@@ -116,11 +124,9 @@ class Registre extends React.Component {
                             }
 
 
-
-
                             this.setState({error: "Loading"})
                         }).catch(error => {
-                         {
+                        {
                             this.setState({error: "Incorrect phone number"})
                         }
                     })

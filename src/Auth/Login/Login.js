@@ -5,6 +5,8 @@ import {withRouter} from 'react-router';
 import {userSignInAC} from "../../Redux/Selectors/Ayu-Selector";
 import {connect} from "react-redux";
 import {compose} from "redux";
+import {AuthAPI, updateToken} from "../../API/api";
+import Cookies from 'js-cookie';
 
 
 // import { GoogleLogin} from 'react-google-login';
@@ -96,19 +98,38 @@ class Login extends React.Component {
         if (email && password) {
             if (this.state.inputslogin[0].isValid) {
                 if (password.length >= 8) {
-                    // axios.post('http://localhost:5000/api/auth/login', {email, password})
-                    axios.post('https://rocky-inlet-34170.herokuapp.com/api/auth/login', {email, password})
+                    AuthAPI.loginAuth(email, password)
                         .then(res => {
+                            console.log(res);
                             if (res.status === 200) {
 
-                                this.props.dispatch(userSignInAC(res.data.user.local));
+                                this.props.dispatch(userSignInAC(res.data.user));
                                 this.props.history.push('/profile/contacts');
-                            }
-                        }).catch(errr => {
-                        // console.log(errr);
-                        this.setState({errorlogin: "Invalid user!!!"})
 
-                    })
+                                updateToken(res.data.token.split(' ')[1]);
+                                Cookies.set('token', res.data.token.split(' ')[1]);
+
+                            }
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            this.setState({errorlogin: "Invalid user!!!"})
+
+                        });
+                    // axios.post('http://localhost:5000/api/auth/login', {email, password})
+
+                    // axios.post('https://rocky-inlet-34170.herokuapp.com/api/auth/login', {email, password})
+                    //     .then(res => {
+                    //         if (res.status === 200) {
+                    //
+                    //             this.props.dispatch(userSignInAC(res.data.user.local));
+                    //             this.props.history.push('/profile/contacts');
+                    //         }
+                    //     }).catch(errr => {
+                    //     // console.log(errr);
+                    //     this.setState({errorlogin: "Invalid user!!!"})
+                    //
+                    // })
 
 
                 } else {
@@ -122,7 +143,7 @@ class Login extends React.Component {
         }
     };
 
-  // Google
+    // Google
     GoogleLogin = () => {
         // window.location.href = "https://rocky-inlet-34170.herokuapp.com/api/auth/google"
         this.props.history.push = "https://rocky-inlet-34170.herokuapp.com/api/auth/google"
@@ -132,8 +153,6 @@ class Login extends React.Component {
         // window.location.href = "https://rocky-inlet-34170.herokuapp.com/api/auth/facebook"
         this.props.history.push = "https://rocky-inlet-34170.herokuapp.com/api/auth/facebook"
     };
-
-
 
 
     render() {

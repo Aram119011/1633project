@@ -17,31 +17,31 @@ class MyProfile extends React.Component {
 
     };
 
-    handleChangelogin = (e, id) => {
-        this.setState({errorlogin: ''});
-        let value = e.currentTarget.value;
-        let inputslogin = this.state.inputslogin;
-        let input = inputslogin[id];
-        input.value = value;
-        input.isTuched = true;
-        Object.keys(input.validation).map((elm, index) => {
-            if (elm == "required") {
-                if (value == "" || value == null) {
-                    input.isValid = false;
-                } else {
-                    input.isValid = true
-                }
-
-            } else if (elm == "email") {
-                let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                if (re.test(value)) {
-                    input.isValid = true;
-                } else {
-                    input.isValid = false
-                }
-            }
-        })
-    };
+    // handleChangelogin = (e, id) => {
+    //     this.setState({errorlogin: ''});
+    //     let value = e.currentTarget.value;
+    //     let inputslogin = this.state.inputslogin;
+    //     let input = inputslogin[id];
+    //     input.value = value;
+    //     input.isTuched = true;
+    //     Object.keys(input.validation).map((elm, index) => {
+    //         if (elm == "required") {
+    //             if (value == "" || value == null) {
+    //                 input.isValid = false;
+    //             } else {
+    //                 input.isValid = true
+    //             }
+    //
+    //         } else if (elm == "email") {
+    //             let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //             if (re.test(value)) {
+    //                 input.isValid = true;
+    //             } else {
+    //                 input.isValid = false
+    //             }
+    //         }
+    //     })
+    // };
 
 EditPrfile = (e)=>{
     // e.preventDefault();
@@ -107,7 +107,7 @@ EditPrfile = (e)=>{
                                         <div className="name-img-group">
                                             <div>
                                     <span className="change-image-icon">
-                                            <input type="file" onChange="readURL(this);" title="Change Picture" />
+                                            <input type="file"  title="Change Picture" />
                                         <span>
                                             <span>
                                                 <img src={imgPhoneCamera}/>
@@ -127,24 +127,22 @@ EditPrfile = (e)=>{
                                             {/*<p className="user-name">{this.props.userData.username}</p>*/}
                                             <div>
                                                 <label htmlFor="username_change">UserName</label>
-                                                <input type="text" className="form-control" id="username_change" value={this.props.userData.username}
-                                                       placeholder=""
-                                                       onChange={(e) => this.handleChangelogin(e, 0)}
+                                                <input type="text" className="form-control" id="username_change" placeholder={this.props.userData.username}
+                                                       // onChange={(e) => this.handleChangelogin(e, 0)}
                                                 />
                                             </div>
                                         </div>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="user_email_change">E-mail</label>
-                                        <input type="email" className="form-control" id="user_email_change" value={this.props.userData.email}
-                                               placeholder=""
-                                               onChange={(e) => this.handleChangelogin(e, 1)}
+                                        <input type="email" className="form-control" id="user_email_change" placeholder={this.props.userData.email}
+                                               // onChange={(e) => this.handleChangelogin(e, 1)}
                                         />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="user_phone_change">Phone Number</label>
-                                        <input type="text" className="form-control" id="user_phone_change" value={this.props.userData.phone}
-                                              onChange={(e) => this.handleChangelogin(e, 2)}
+                                        <input type="text" className="form-control" id="user_phone_change" placeholder={this.props.userData.phone}
+                                              // onChange={(e) => this.handleChangelogin(e, 2)}
                                         />
                                     </div>
                                     <div className="form-group date-time-group">

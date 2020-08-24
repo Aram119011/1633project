@@ -64,15 +64,11 @@ class SignUp extends React.Component {
 
     closeForgotPass = () => {
         this.setState(state => ({showForgotPass: false}))
-
     };
-
 
     openTextPass = () => {
         this.setState(state => ({showtextpassword: true}));
-
     };
-
 
     closeTextPass = () => {
         this.setState(state => ({showtextpassword: false}))
@@ -209,16 +205,18 @@ class SignUp extends React.Component {
                             {/* -------------------ForgotPassword---------------------- */}
                             {
 
-                                this.state.showForgotPass && <ForgottenPassword openTextPass={this.openTextPass}
-                                                                                closeForgotPass={this.closeForgotPass}/>
-
+                                this.state.showForgotPass &&
+                                <ForgottenPassword openTextPass={this.openTextPass}
+                                                   closeForgotPass={this.closeForgotPass}/>
                             }
 
 
                             {
 
                                 this.state.showtextpassword &&
-                                <TextInfo closeTextPass={this.closeTextPass} openShowinfoMsg={this.openShowinfoMsg}/>
+                                <TextInfo
+                                    closeTextPass={this.closeTextPass}
+                                    openShowinfoMsg={this.openShowinfoMsg}/>
 
                             }
 
